@@ -13,6 +13,9 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Docker Login
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin myregistry.example.com
+
     - name: Build Docker image
       run: docker build -t my_image .
 
@@ -22,3 +25,8 @@ jobs:
         docker exec my_container bash -c './display_name.sh'
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Stop and Remove Docker Container
+      run: |
+        docker stop my_container || true
+        docker rm my_container || true
