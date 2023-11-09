@@ -13,10 +13,12 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Build Docker image
+      run: docker build -t my_image .
+
     - name: Run Docker Container
       run: |
         docker run -d --name my_container my_image
-        docker exec my_container bash -c 'echo "Your First Name: YourFirstName"'
-        docker exec my_container bash -c 'echo "Your Last Name: YourLastName"'
+        docker exec my_container bash -c './display_name.sh'
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
