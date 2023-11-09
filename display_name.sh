@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "Your First Name: John"
-echo "Your Last Name: Doe"
+echo "Your First Name: Nazarii"
+echo "Your Last Name: Koval"
